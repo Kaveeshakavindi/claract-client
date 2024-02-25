@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### --------------------------------
+
+### Learning outcomes 
+1. react router
+2. css animations
+3. scroll snap
+
+good source : https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap/Basic_concepts
+
+parallax :
+https://medium.com/stackanatomy/adding-parallax-scroll-animations-to-react-a518889ee547
+
+### important paralax
+https://react-scroll-parallax.damnthat.tv/docs/migration-guides/v1-migration-guide
+
+scroll animation plugins:
+https://www.framer.com/motion/scroll-animations/

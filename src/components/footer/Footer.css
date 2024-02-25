@@ -1,0 +1,113 @@
+footer{
+    height: fit-content;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    justify-content: center;
+    align-items: center;
+  
+}
+.footer-container{
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.line-button1{
+    height: fit-content;
+    width: fit-content;
+    padding: 10px 30px;
+    border: solid 1px black;
+    border-radius: 2rem;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+.line-button1:hover{
+    background-color: black;
+    color: white;
+ cursor: pointer;
+}
+.footer-email{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.footer-email-title{
+    text-align: justify;
+}
+.email-input{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 0.5rem;
+}
+.input{
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    font-size: 12px;
+}
+.email-submit{
+    border: none;
+    border-radius: 2rem;
+    background-color: white;
+    padding: 10px 30px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.email-submit:hover{
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+.horizontal-line{
+    background-color: rgb(214, 214, 214);
+    height: 1px;
+    margin: 1rem;
+}
+.footer-final{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+.rights{
+    font-size: 12px;
+    color: rgb(146, 146, 146);
+}
+.logo{
+
+}
+.socials{
+    font-size: 12px;
+    color: rgb(146, 146, 146);
+}
+
+@media screen and (max-width:480px) {
+    .email-input{
+    
+        flex-direction: column;
+        
+    }
+    .input{
+        width: auto;
+        
+    }
+    .footer-final{
+        font-size: 12px;
+        
+        
+    }
+    footer{
+     
+    }
+    
+}
