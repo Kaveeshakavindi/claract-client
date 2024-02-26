@@ -1,69 +1,78 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Cart.css";
 import Axios from "axios";
 
 const Cart = () => {
-    const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState(null);
 
-    useEffect(()=> {  
-        Axios.get('http://localhost:3000/getAll')
-        .then((res)=> setProducts(res.data));
-    }, []);
-   
+  useEffect(() => {
+    Axios.get("http://localhost:3000/cart")
+      .then((response) => {
+        const json = JSON.stringify(response.data);
+        setCart(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching cart: ", error);
+        window.alert("Error fetching cart");
+      });
+  }, []);
+
+  if (!cart) {
+    return <div>Loading...</div>;
+  }
+
+  //delete cart
+  const deleteCart = async () => {
+    try {
+      await fetch("http://localhost:3000/cart", {
+        method: "DELETE",
+      });
+
+      window.alert("Cart deleted successfully");
+    } catch (err) {
+      console.error("Failed to delete cart:", err);
+      window.alert("Failed to delete cart");
+    }
+  };
+
+  //calculate total
+  function calculateTotal(items) {
+    let total = 0;
+    items.forEach((item) => {
+      total += item.productPrice * item.quantity;
+    });
+    return total;
+  }
 
   return (
     <div className="web-page">
       <div className="cart-container">
         <div className="page-title">Your Bag</div>
         <div className="cart-contents">
-          <table className="cart-table">
-            <thead className="cart-table-head">
-              <tr className="cart-table-head-row">
-                <th className="cart-table-head-column">Product</th>
-                <th className="cart-table-head-column">Description</th>
-                <th className="cart-table-head-column">Quantity</th>
-                <th className="cart-table-head-column">Price</th>
-                <th className="cart-table-head-column">Delete</th>
-              </tr>
-            </thead>
-            <tbody className="cart-table-body">
-            {products && products.map((product) => (
-    <tr className="cart-table-body-row" key={product.id}>
-        <td className="cart-table-body-data">{product.name}</td>
-        <td className="cart-table-body-data">description</td>
-        <td className="cart-table-body-data">{product.stock}</td>
-        <td className="cart-table-body-data">{product.price}</td>
-        <td className="cart-table-body-data">
-            <button className="x-button">X</button>
-        </td>
-    </tr>
-))}  
-            </tbody>
-          </table>
-
-          <div className="order-summary">
-            <div className="order-summary-title">order summary</div>
-
-            <div className="order-info">
-              <div className="order-products">
-                <div className="product-quantity">2 prdoducts</div>
-                <div className="order-gross">64$</div>
-              </div>
-
-              <div className="order-shipping">
-                <div className="shipping">Shipping</div>
-                <div className="shipping-cost">5$</div>
-              </div>
-            </div>
-
-            <div className="order-total">
-                <div className="total-title">
-                    Total
-                </div>
-                <div className="total">69$</div>
-            </div>
-            <button className="checkout">Checkout</button>
-          </div>
+        <table className="cart-table">
+            {cart.items.map((item) => (
+             
+                <tr className="cart-table-row" key={item._id}>
+                  <img src={item.productImg} 
+                  className="cart-img" />
+                  <div className="cart-item-details">
+                    <div className="cart-item-name">
+                      {item.productName}
+                    </div>
+                    <div className="cart-item-price">
+                     Price: {item.productPrice} $
+                    </div>
+                    
+                  </div>
+                  <div className="cart-item-qty">
+                     Qty: {item.quantity}
+                    </div>
+                </tr>
+              
+            ))}
+            </table>
+          <div>Total Price: {calculateTotal(cart.items)} $</div>
+          <button onClick={deleteCart}>delete cart</button>
         </div>
       </div>
     </div>
