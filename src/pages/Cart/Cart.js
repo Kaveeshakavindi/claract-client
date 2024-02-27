@@ -35,13 +35,37 @@ const Cart = () => {
     }
   };
 
+  //delete item
+  const removeItem = async (itemId) => {
+    try {
+      await fetch(`http://localhost:3000/cart/${itemId}`, {
+        method: "DELETE",
+      });
+ window.alert("item deleted successfuly")
+     
+    } catch (err) {
+      console.error("Failed to delete cart:", err);
+      window.alert("Failed to delete cart");
+    }
+  };
+
   //calculate total
-  function calculateTotal(items) {
-    let total = 0;
+  function calculateTotal (price, quantity){
+     let total = 0;
+
+     total = price * quantity
+     return total; 
+  }
+
+  //calculate subtotal
+  function calculateSubTotal(items) {
+    let subTotal = 0;
+
     items.forEach((item) => {
-      total += item.productPrice * item.quantity;
+      subTotal += item.productPrice * item.quantity;
+
     });
-    return total;
+    return subTotal;
   }
 
   return (
@@ -49,30 +73,58 @@ const Cart = () => {
       <div className="cart-container">
         <div className="page-title">Your Bag</div>
         <div className="cart-contents">
+        
         <table className="cart-table">
-            {cart.items.map((item) => (
-             
+            
+                 <tr className="cart-table-row">
+                  <div className="cart-table-head">
+                    PRODUCT
+                  </div>
+                  <div className="cart-table-head">
+                    QTY
+                  </div>
+                  <div className="cart-table-head">
+                    PRICE
+                  </div>
+                  <div className="cart-table-head">
+                    TOTAL PRICE
+                  </div>
+                 </tr>
+                 {cart.items.map((item) => (
                 <tr className="cart-table-row" key={item._id}>
+                 
+                  <div className="cart-item-details">
                   <img src={item.productImg} 
                   className="cart-img" />
-                  <div className="cart-item-details">
+                  <div className="cart-item-contents">
+                  
                     <div className="cart-item-name">
                       {item.productName}
                     </div>
-                    <div className="cart-item-price">
-                     Price: {item.productPrice} $
+                    <div className="cart-item-remove" onClick={() => removeItem(item._id)}>REMOVE</div>
                     </div>
                     
                   </div>
                   <div className="cart-item-qty">
                      Qty: {item.quantity}
                     </div>
+                    <div className="cart-item-price">
+                    {item.productPrice} $
+                    </div>
+                    <div className="cart-item-total">
+                      {calculateTotal(item.productPrice, item.quantity)} $
+                    </div>
                 </tr>
-              
-            ))}
+              ))}
+            <tr className="cart-table-row cart-sub-total">
+                  <div></div>
+                  <div></div>
+                  <div>Sub Total</div>
+                  <div>{calculateSubTotal(cart.items)} $</div>
+            </tr>
             </table>
-          <div>Total Price: {calculateTotal(cart.items)} $</div>
-          <button onClick={deleteCart}>delete cart</button>
+
+          <button onClick={deleteCart}>Reset cart</button>
         </div>
       </div>
     </div>
