@@ -9,6 +9,7 @@
   height: auto;
   background-color: var(--color-bg);
   z-index: 2000;
+ 
 }
 .logo {
   padding: 0.5rem;

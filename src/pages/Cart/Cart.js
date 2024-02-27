@@ -3,6 +3,12 @@ import "./Cart.css";
 import Axios from "axios";
 
 const Cart = () => {
+  const refreshInterval = 0; 
+
+const reloadPage = () => {
+  window.location.reload(true); 
+};
+
   const [cart, setCart] = useState(null);
 
   useEffect(() => {
@@ -33,6 +39,7 @@ const Cart = () => {
       console.error("Failed to delete cart:", err);
       window.alert("Failed to delete cart");
     }
+    setTimeout(reloadPage, refreshInterval);
   };
 
   //delete item
@@ -47,6 +54,7 @@ const Cart = () => {
       console.error("Failed to delete cart:", err);
       window.alert("Failed to delete cart");
     }
+    setTimeout(reloadPage, refreshInterval);
   };
 
   //calculate total
@@ -106,7 +114,7 @@ const Cart = () => {
                     
                   </div>
                   <div className="cart-item-qty">
-                     Qty: {item.quantity}
+                     {item.quantity}
                     </div>
                     <div className="cart-item-price">
                     {item.productPrice} $

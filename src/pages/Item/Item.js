@@ -6,9 +6,16 @@ import DropDown from "../../components/DropDown/DropDown";
 import { useNavigate } from "react-router-dom";
 
 const Item = () => {
+
   const [cartItems, setCartItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const { id } = useParams();
+
+  const refreshInterval = 0; 
+
+const reloadPage = () => {
+  window.location.reload(true); 
+};
   
   useEffect(() => {
     // Fetch the specific item based on the ID
@@ -45,6 +52,7 @@ const Item = () => {
             }
             );
             window.alert(`product exists went through patch ${existingCartItem.quantity}`, )
+            
         } else {
             //if the product doesn't exist in the cart, add it
             await fetch('http://localhost:3000/cart', {
@@ -56,12 +64,13 @@ const Item = () => {
             });
             window.alert('product doesnt exist, item added to cart', cartItems)
         }
-        
+        setTimeout(reloadPage, refreshInterval);
        // Update cart items state
     } catch (err) {
         console.error('Failed to update cart:', err);
         window.alert('Failed to update cart');
     }
+    
 };
 
   

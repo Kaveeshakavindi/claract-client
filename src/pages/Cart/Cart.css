@@ -44,14 +44,40 @@
 justify-content: space-between;
  height: 100%;
 }
+.cart-item-name{
+  font-size: 15px;
+}
 
 .cart-item-remove{
   font-weight: 100;
   text-decoration: underline;
+  width: fit-content;
 }
 .cart-item-remove:hover{
   cursor: pointer;
 }
 .cart-sub-total{
 font-weight: bold;
+}
+
+@media screen and (max-width: 480px) {
+  .cart-table-head{
+    font-size: 10px;
+  }
+  .cart-item-contents{
+    width: 100%;
+    gap: 1rem
+  }
+  .cart-item-details{
+    flex-direction: column;
+    gap: 0rem;
+  }
+  .cart-img{
+    width: 100%;
+    text-align: left;
+  }
+  .cart-item-name{
+    font-size:10px;
+  }
+
 }
